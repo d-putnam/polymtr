@@ -66,6 +66,8 @@ body{
 
 #fx {
   max-width: 1180px;
+  margin-left: auto;
+
 }
 
 #reverb {
@@ -145,13 +147,13 @@ body{
   margin-left: .5rem;
 }
 .left-label {
-  padding-left: .35rem;
+  padding-left: .52rem;
 }
 .right-label {
   text-align: right; 
   margin-top:0.3rem;
   margin-bottom:0.5rem;
-  padding-right:.35rem;
+  padding-right:.52rem;
 }
 
 
@@ -166,11 +168,41 @@ body{
   margin-top: .2rem;
 }
 
-
-
-
-
 .snare-buttons {
-  margin-top: 5px;
-  margin-bottom: 15px;
+  margin-top: .7rem;
+  margin-bottom: .65rem;
+}
+
+input {
+  width: 2rem;
+  background-color: rgb(190,190,190);
+  border-color: transparent;
+  text-align: center;
+}
+
+.step-control {
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  font-size: smaller
+}
+.first-row {
+  margin-bottom: 0.1rem;
+}
+
+
+@media screen and (max-device-width: 768px) {
+  .channel {
+    max-width: 170px;
+    min-height: calc(100% - 500px);
+  }
+}
+
+@media screen and (max-device-width: 415px) {
+  #global-ctrl {
+    width:46.21rem;
+  }
+  .channel {
+    max-width: 170px;
+    min-height: calc(100% - 500px);
+  }
 }

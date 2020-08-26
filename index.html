@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>algo-pattr</title>
   <link href="css/styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
 
   <!-- Compressor + Reverb rack -->
   <div id="effects-rack" class="mx-auto">
-    <div id="fx" class="flex-center mx-auto">
+    <div id="fx" class="flex mx-auto">
 
       <!-- Compressor UI -->
       <div id="compressor" class="module mx-auto my-auto">
@@ -143,7 +143,7 @@
         </div>
         <br>
         <!-- Kick Timbre Controls -->
-        <div class="flex-around">
+        <div class="flex-around first-row">
           <div class="center" style="width:33%">
             <div id="kick-freq" class="mx-auto"></div>
             <label>ƒreq</label>
@@ -173,6 +173,10 @@
         </div>
         <br>
         <!-- Kick Pattern Controls -->
+        <div class="step-control center">
+          <input id="kick-length" type="number" value="16">
+          <label>seq length</label>
+        </div>
         <div class="left-label flex">
           <img src="img/left-arrow.svg" width="15">
           <div class="left-text">pattern density</div>
@@ -223,7 +227,7 @@
         </div>
         <br>
         <!-- Hats Timbre Controls -->
-        <div class="flex-around">
+        <div class="flex-around first-row">
           <div class="center" style="width:33%">
             <div id="hats-freq" class="mx-auto"></div>
             <div>ƒreq</div>
@@ -249,6 +253,10 @@
         </div>
         <br>
         <!-- Hats Pattern Controls -->
+        <div class="step-control center">
+          <input id="hats-length" type="number" value="16">
+          <label>seq length</label>
+        </div>
         <div class="left-label flex">
           <img src="img/left-arrow.svg" width="15">
           <div class="left-text">pattern density</div>
@@ -314,6 +322,10 @@
         </div>
         <br>
         <!-- Snare Pattern Controls -->
+        <div class="step-control center">
+          <input id="snare-length" type="number" value="16">
+          <label>seq length</label>
+        </div>
         <div class="left-label flex">
           <img src="img/left-arrow.svg" width="15">
           <div class="left-text">pattern density</div>
@@ -363,7 +375,7 @@
         </div>
         <br>
         <!-- Perc Timbre Controls -->
-        <div class="flex-around">
+        <div class="flex-around first-row">
           <div class="center" style="width:50%">
             <div id="perc-freq" class="mx-auto"></div>
             <div>ƒreq</div>
@@ -385,6 +397,10 @@
         </div>
         <br>
         <!-- Perc Pattern Controls -->
+        <div class="step-control center">
+          <input id="perc-length" type="number" value="16">
+          <label>seq length</label>
+        </div>
         <div class="left-label flex">
           <img src="img/left-arrow.svg" width="15">
           <div class="left-text">pattern density</div>

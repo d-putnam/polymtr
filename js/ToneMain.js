@@ -13,7 +13,8 @@ Tone.context.latencyHint = 'interactive' // or 'playback' or 'balanced'
 
 // notes array[0]-[3] will contain our four active sequences
 // values will be 1.0 or 0.3 (accent or non-accented volume level)
-let notes = [...Array(4)].map(() => [...Array(16)].map(() => 1.0));
+let notes = [...Array(4)].map(() => [...Array(32)].map(() => 1.0));
+
 
 // probArray will be filled with random numbers
 // Based on the patten threshold values, each value will become either a note or rest
@@ -236,13 +237,15 @@ let percPart = new Tone.Sequence(
 percPart.start();
 
 
-
 // updateProb is called upon any pattern change
 // takes values from probArray, compares them to the threshold settings
 // and updates the target notes array with an
+let kickLength = hatsLength = snareLength = percLength = 16;
+
 function updateProb(index) {
-  let track = probArray[index]
+  let track = probArray[index].slice(0, getLength(index))
   let i = 0;
+  notes[index] = [];
   track.forEach(step => {
     if (step >= getState(index).thresh1) {
       if (step >= getState(index).thresh2) {
@@ -253,16 +256,18 @@ function updateProb(index) {
     } else {
         notes[index][i] = null
     }
-    getPart(index).events = notes[index];
     i++
   })
+  getPart(index).events = notes[index];
+
 }
+
 
 
 // call this the first time before multisliders are rendered by NexusUI
 randomInit = () => {
   // Get four arrays of 16 random values (one per track)
-  probArray = [...Array(4)].map(() => [...Array(16)].map(() => Math.floor(Math.random() * 127)));
+  probArray = [...Array(4)].map(() => [...Array(32)].map(() => Math.floor(Math.random() * 127)));
   updateProb(0);
   updateProb(1);
   updateProb(2);
@@ -274,11 +279,11 @@ randomInit();
 // randomize a pattern and update the multislider
 function randomizePattern(index) {
   // Get four arrays of 16 random values (one per track)
-  probArray[index] = [...Array(16)].map(() => Math.floor(Math.random() * 127));
-  // Set the multislider
-  getMultislider(index).setAllSliders(probArray[index])
+  probArray[index] = [...Array(32)].map(() => Math.floor(Math.random() * 127));
   // Convert to sequences
-  updateProb(index);
+  updateProb(index)
+  // Set the multislider
+  getMultislider(index).setAllSliders(probArray[index].slice(0, getLength(index)))
 }
 
 
@@ -329,5 +334,18 @@ function getState(index) {
     return {"thresh1": snareThresh1, "thresh2": snareThresh2}
   } else if (index === 3) {
     return {"thresh1": percThresh1, "thresh2": percThresh2}
+  }
+}
+
+// returns pattern length
+function getLength(index) {
+  if (index === 0) {
+    return kickLength;
+  } else if (index === 1) {
+    return hatsLength;
+  } else if (index === 2) {
+    return snareLength;
+  } else if (index === 3) {
+    return percLength;
   }
 }

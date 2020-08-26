@@ -441,6 +441,7 @@ kick_ramp.on('change', v => {
 })
 
 
+
 // Get our SVG lines to be manipulated by pattern sliders
 let kickline = document.querySelector('#kick-line');
 let kickline2 = document.querySelector('#kick-line2');
@@ -497,7 +498,7 @@ let kick_mult = new Nexus.Multislider('#kick-patt', {
   'max': 127,
   'step': 1,
   'candycane': 4,
-  'values': probArray[0],
+  'values': probArray[0].slice(0, kickLength),
   'smoothing': 0,
   'mode': 'bar' 
 })
@@ -507,6 +508,35 @@ kick_mult.on('change', v => {
 })
 // Set the colors
 kick_mult.colorize("fill","rgba(238,238,238,0.55)")
+
+
+// Kick pattern length
+let kick_len = document.querySelector('#kick-length')
+
+kick_len.oninput = () => {
+  kickLength = kick_len.value;
+
+  kick_mult.destroy();
+
+  kick_mult = new Nexus.Multislider('#kick-patt', {
+    'size': [130,100],
+    'numberOfSliders': kick_len.value,
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'candycane': 3,
+    'values': probArray[0].slice(0, kickLength),
+    'smoothing': 0,
+    'mode': 'bar'  
+  })
+  kick_mult.on('change', v => {
+    probArray[0] = v;
+    updateProb(0);
+  })
+  kick_mult.colorize("fill","rgba(238,238,238,0.55)");
+
+  updateProb(0);
+}
 
 
 
@@ -727,7 +757,7 @@ let hats_mult = new Nexus.Multislider('#hats-patt', {
   'max': 127,
   'step': 1,
   'candycane': 4,
-  'values': probArray[1],
+  'values': probArray[1].slice(0, hatsLength),
   'smoothing': 0,
   'mode': 'bar'  
 })
@@ -736,6 +766,35 @@ hats_mult.on('change', v => {
   updateProb(1);
 })
 hats_mult.colorize("fill","rgba(238,238,238,0.55)")
+
+
+// Hats pattern length
+let hats_len = document.querySelector('#hats-length')
+
+hats_len.onchange = (e) => {
+  hatsLength = hats_len.value;
+
+  hats_mult.destroy();
+
+  hats_mult = new Nexus.Multislider('#hats-patt', {
+    'size': [130,100],
+    'numberOfSliders': hats_len.value,
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'candycane': 3,
+    'values': probArray[1].slice(0, hatsLength),
+    'smoothing': 0,
+    'mode': 'bar'  
+  })
+  hats_mult.on('change', v => {
+    probArray[1] = v;
+    updateProb(1);
+  })
+  hats_mult.colorize("fill","rgba(238,238,238,0.55)");
+
+  updateProb(1);
+}
 
 
 // hats volume slider
@@ -929,7 +988,7 @@ let snare_mult = new Nexus.Multislider('#snare-patt', {
   'max': 127,
   'step': 1,
   'candycane': 4,
-  'values': probArray[2],
+  'values': probArray[2].slice(0, snareLength),
   'smoothing': 0,
   'mode': 'bar'  
 })
@@ -938,6 +997,35 @@ snare_mult.on('change', v => {
   updateProb(2);
 })
 snare_mult.colorize("fill","rgba(238,238,238,0.55)")
+
+
+// snare pattern length
+let snare_len = document.querySelector('#snare-length')
+
+snare_len.onchange = () => {
+  snareLength = snare_len.value;
+
+  snare_mult.destroy();
+
+  snare_mult = new Nexus.Multislider('#snare-patt', {
+    'size': [130,100],
+    'numberOfSliders': snare_len.value,
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'candycane': 3,
+    'values': probArray[2].slice(0, snareLength),
+    'smoothing': 0,
+    'mode': 'bar'  
+  })
+  snare_mult.on('change', v => {
+    probArray[2] = v;
+    updateProb(2);
+  })
+  snare_mult.colorize("fill","rgba(238,238,238,0.55)");
+
+  updateProb(2);
+}
 
 
 // Snare randomize button
@@ -1147,7 +1235,7 @@ let perc_mult = new Nexus.Multislider('#perc-patt', {
   'max': 127,
   'step': 1,
   'candycane': 4,
-  'values': probArray[3],
+  'values': probArray[3].slice(0, percLength),
   'smoothing': 0,
   'mode': 'bar'  
 })
@@ -1157,6 +1245,34 @@ perc_mult.on('change', v => {
 })    
 perc_mult.colorize("fill","rgba(238,238,238,0.55)")
 
+
+// perc pattern length
+let perc_len = document.querySelector('#perc-length')
+
+perc_len.onchange = () => {
+  percLength = perc_len.value;
+
+  perc_mult.destroy();
+
+  perc_mult = new Nexus.Multislider('#perc-patt', {
+    'size': [130,100],
+    'numberOfSliders': perc_len.value,
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'candycane': 3,
+    'values': probArray[3].slice(0, percLength),
+    'smoothing': 0,
+    'mode': 'bar'  
+  })
+  perc_mult.on('change', v => {
+    probArray[3] = v;
+    updateProb(3);
+  })
+  perc_mult.colorize("fill","rgba(238,238,238,0.55)");
+
+  updateProb(3);
+}
 
 
 // Perc randomize button
