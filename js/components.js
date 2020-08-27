@@ -11,7 +11,7 @@ let oscilloscope = new Nexus.Oscilloscope('#oscilloscope', {
 oscilloscope.connect(compressor._compressor._nativeAudioNode);
 // set the colors
 oscilloscope.colorize("fill","rgb(40,40,40)");
-oscilloscope.colorize("accent","white");
+oscilloscope.colorize("accent","rgba(255, 255, 255, 0.2)");
 // watch for screen resize
 window.onresize = () => {
   oscilloscope.resize(window.innerWidth, window.innerHeight);
@@ -89,7 +89,7 @@ let compThresh = new Nexus.Dial('#comp-thresh', {
   'min': 0,
   'max': 100,
   'step': 0,
-  'value': 30
+  'value': 40
 })
 compThresh.on('change', v => {
   compressor.threshold.value = v * -1;
@@ -164,7 +164,7 @@ let roomSizeSlider = new Nexus.Dial('#roomSize', {
   'min': 0.1,
   'max': 10,
   'step': 0,
-  'value': 1.5
+  'value': 4.5
 })
 roomSizeSlider.on('change', v => {
   verb.decay = v;
@@ -256,7 +256,7 @@ let snare_send = new Nexus.Dial('#snare-send', {
   'min': 0,
   'max': 127,
   'step': 1,
-  'value': 0
+  'value': 20
 })
 snare_send.on('change', v => {
   let amp = v / 127;
@@ -272,7 +272,7 @@ let perc_send = new Nexus.Dial('#perc-send', {
   'min': 0,
   'max': 127,
   'step': 1,
-  'value': 0
+  'value': 63
 })
 perc_send.on('change', v => {
   let amp = v / 127;
@@ -389,7 +389,7 @@ let kick_dist = new Nexus.Dial('#kick-dist', {
   'min': 0,
   'max': 127,
   'step': 1,
-  'value': 32
+  'value': 20
 })
 kick_dist.on('change', v => {
   kickDist.distortion = v / 127;
@@ -434,7 +434,7 @@ let kick_ramp = new Nexus.Dial('#kick-oct', {
   'min': 0.5,
   'max': 9.,
   'step': 0,
-  'value': 4
+  'value': 2.9
 })
 kick_ramp.on('change', v => {
   kick.octaves = v
@@ -514,6 +514,11 @@ kick_mult.colorize("fill","rgba(238,238,238,0.55)")
 let kick_len = document.querySelector('#kick-length')
 
 kick_len.oninput = () => {
+  if (kick_len.value < 3) {
+    kick_len.value = 3;
+  } else if (kick_len.value > 32) {
+    kick_len.value = 32;
+  }
   kickLength = kick_len.value;
 
   kick_mult.destroy();
@@ -684,7 +689,7 @@ let hats_delaytime = new Nexus.Dial('#hats-delaytime', {
   'min': 0,
   'max': 2,
   'step': 0,
-  'value': 0.98,
+  'value': 1.356,
 })
 hats_delaytime.on('change', v => {
   hatsDelay.delayTime.value = v.toString();
@@ -842,7 +847,7 @@ let snare_env = new Nexus.Envelope('#snare-env', {
       y: 0.825
     },
     {
-      x: 0.1,
+      x: 0.251,
       y: 0.0
     },
   ]
@@ -879,7 +884,7 @@ let snare_release = new Nexus.Slider('#snare-release', {
   'min': 0.01,
   'max': 1.0,
   'step': 0,
-  'value': .1
+  'value': .247
 })
 snare_release.on('change', v => {
   snare_env.movePoint(2, sa + v, 0.)
@@ -892,7 +897,7 @@ snare_release.on('change', v => {
 let snare_noise = new Nexus.RadioButton('#snare-noise', {
   'size': [120,20],
   'numberOfButtons': 3,
-  'active': 0
+  'active': 1
 })
 snare_noise.on('change', v => {
   if (v === 0) {
@@ -914,7 +919,7 @@ let snare_cutoff = new Nexus.Dial('#snare-cutoff', {
   'min': 60,
   'max': 10000,
   'step': 0,
-  'value': 7556,
+  'value': 7561,
 })
 snare_cutoff.on('change', v => {
   snareFilterFreq.value = v
@@ -929,7 +934,7 @@ let snare_res = new Nexus.Dial('#snare-res', {
   'min': 0,
   'max': 25,
   'step': 0,
-  'value': 10
+  'value': 9.5
 })
 snare_res.on('change', v => {
   snareFilterRes.value = v

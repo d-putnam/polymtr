@@ -17,9 +17,9 @@ body{
   width:46.21rem;
 }
 
-.module {
+.module, .global-module {
   padding: .5rem;
-  background-color: rgba(60,60,60,0.9);
+  background-color: rgba(60,60,60,0.95);
   border: 2px solid rgba(190,190,190,0.9);
   border-radius: 10px;
 }
@@ -27,6 +27,38 @@ body{
 .module-label {
   font-size: x-large;
   text-align: center;
+}
+.nav {
+  position: absolute;
+  bottom: 10px;
+}
+.nav-inactive {
+  height:1.5rem;
+  padding-top:0.3rem;
+  padding-left:0.2rem;
+  padding-right:0.2rem;
+  margin-bottom: 0.2rem;
+  text-align:center;
+  background-color: rgba(60,60,60,0.95);
+  border-style: solid solid solid solid; 
+  border-radius: 10px;
+  border-width: 2px;
+  opacity: 0.7;
+  border-color: rgba(190,190,190,0.9);
+}
+.nav-active {
+  height:1.5rem;
+  padding-top:0.3rem;
+  padding-left:0.2rem;
+  padding-right:0.2rem;
+  margin-bottom: 0.2rem;
+  text-align:center;
+  background-color: rgba(60,60,60,0.95);
+  border-style: solid solid solid solid; 
+  border-width: 2px;
+  border-radius: 10px;
+  opacity: 0.95;
+  border-color: rgba(168, 154, 83, 0.8);
 }
 
 
@@ -80,6 +112,13 @@ body{
     border-radius: 50px;
     height: fit-content;
     padding: .25rem;
+    width:45%;
+  }
+  #verb-eq {
+    width:30%;
+  }
+  #verb-decay {
+    width:15%;
   }
 
 #compressor {
@@ -95,8 +134,10 @@ body{
 
 .container {
   width: 100vw;
-  max-width: 75rem;
+  max-width: 100vw;
   min-width: max-content;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .channel {
@@ -140,7 +181,7 @@ body{
 
 .random-label {
   margin-left: 0.5rem;
-  margin-top: 0.35rem;
+  margin-top: 0.5rem;
 }
 .left-text {
   margin-bottom: .5rem;
@@ -189,20 +230,122 @@ input {
   margin-bottom: 0.1rem;
 }
 
+.smaller {
+  font-size:smaller;
+}
 
+.divider {
+  margin-left: -0.5rem;margin-right: -0.5rem; width:186px; height:8px
+}
+.divider path {
+  fill: rgba(190,190,190,0.9);
+  fill-opacity: 1;
+}
+.flipped {
+  transform: rotate(180deg)scale(-1,1)translate(0px,-29px);
+  transform-origin: 50% 50%;
+}
+.first-divider {
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+.second-divider {
+  margin-top: 0.7rem;
+  margin-bottom: 0.1rem;
+}
+.third-divider {
+  margin-top: 0.7rem;
+}
+
+.sm-show {
+  display:none
+}
+
+/*
 @media screen and (max-device-width: 768px) {
   .channel {
     max-width: 170px;
-    min-height: calc(100% - 500px);
+  }
+  #reverb {
+    max-width: 50vw;
   }
 }
-
+*/
 @media screen and (max-device-width: 415px) {
+  .md-hide {
+    display:none;
+  }
+  #global-controls {
+    display:flex;
+  }
+  .container {
+    width: 415px;
+    flex-wrap: wrap;
+    min-width: auto;
+  }
   #global-ctrl {
-    width:46.21rem;
+    width: 410px;
   }
   .channel {
     max-width: 170px;
     min-height: calc(100% - 500px);
+    margin-bottom: 1rem;
+  }
+  #fx {
+    display:block;
+  }
+  #reverb {
+    max-width: 390px;
+    min-width: 390px;
+  }
+
+}
+
+@media screen and (max-device-width: 375px) {
+  .sm-hide {
+    display:none;
+  }
+  #global-ctrl {
+    width: 300px;
+  }
+  #reverb {
+    max-width: 300px;
+    min-width: 300px;
+  }
+  #verb-sends {
+    width: 100%;
+  }
+  #verb-eq{
+    width: 50%
+  }
+  #verb-decay {
+    width:25%;
+  }
+  #reverb-container {
+    flex-wrap: wrap;
+  }
+  .sm-show {
+    display:block
   }
 }
+
+/* tiny phones in regular orientation */
+@media only screen and (max-width: 320px) {
+  .tiny-hide {
+    display:none;
+  }
+  #compressor {
+    width:300px;
+    min-width:300px;
+  }
+ }
+
+/*
+#guide {
+  border: 1px solid red;
+  width: 375px;
+  height: 812px;
+  position:absolute;
+  top:0;
+  left:0;
+}*/

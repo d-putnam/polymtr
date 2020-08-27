@@ -37,7 +37,7 @@ let kickThresh1 = 64, kickThresh2 = 95,
 // Compression reduces volume, so connect it to a Gain node, then use compressor.reduction value
 // for makeup level. Sequence this param for smooth-ish auto-gain
 let compressorMakeup = new Tone.Gain(1).toDestination();
-let compressor = new Tone.Compressor(-30, 3).connect(compressorMakeup);
+let compressor = new Tone.Compressor(-40, 3).connect(compressorMakeup);
 // Give an arbitrary array to sequence
 let compArr = ["C4"];
 // update the makeup gain every 32nd note
@@ -58,6 +58,7 @@ compSeq.start();
 // Runs through EQ then goes to compressor
 const verbEQ = new Tone.EQ3().connect(compressor)
 const verb = new Tone.Reverb().connect(verbEQ);
+verb.decay = 4.5;
 verb.wet.value = 1;
 
 
@@ -82,7 +83,7 @@ const kickFilter = new Tone.Filter(60, "highpass").connect(compressor).connect(k
     }).connect(kickFilter.Q);
 
 // Our distortion node -- connect to filter
-const kickDist = new Tone.Distortion(.25).connect(kickFilter);
+const kickDist = new Tone.Distortion(.157).connect(kickFilter);
 
 // Our volume node -- connects to distortion
 const kickGain = new Tone.Gain(0.5).connect(kickDist);
@@ -97,7 +98,7 @@ const kick = new Tone.MembraneSynth().connect(kickGain);
       units: "frequency"
     }).connect(kick.detune);
     // initial FM value
-    kick.octaves = 4
+    kick.octaves = 2.9
     // Kick envelope settings (built into MembraneSynth)
     kick.envelope.attack = 0.01;
     kick.envelope.decay = 0.3;
@@ -121,7 +122,7 @@ kickPart.start();
 const hatsSend = new Tone.Gain(0).connect(verb);
 
 // Delay connects to main output and reverb send
-const hatsDelay = new Tone.PingPongDelay("0.98, 0.2").connect(compressor).connect(hatsSend)
+const hatsDelay = new Tone.PingPongDelay("1.356, 0.2").connect(compressor).connect(hatsSend)
 hatsDelay.wet.value = 0;
 
 // Our volume node -- connects to filter
@@ -161,18 +162,18 @@ hatsPart.start();
 // SNARE (channel 3)
 //////
 // Send is a gain node, controls level sent to reverb
-const snareSend = new Tone.Gain(0).connect(verb)
+const snareSend = new Tone.Gain(0.157).connect(verb)
 
 // Filter connects to main output and reverb send
 const snareFilter = new Tone.Filter(7556, "lowpass").connect(compressor).connect(snareSend);
     // Set up a signal for controlling the filter cutoff
     let snareFilterFreq = new Tone.Signal({
-      value: "10000",
+      value: "7561",
       units: "frequency"
     }).connect(snareFilter.frequency);
     // Set up a signal for controlling the filter resonance
     let snareFilterRes = new Tone.Signal({
-      value: "10",
+      value: "9.5",
       units: "frequency"
     }).connect(snareFilter.Q);
 
@@ -181,9 +182,10 @@ const snareGain = new Tone.Gain(0.5).connect(snareFilter);
 
 // Our snare synth -- connect to gain/volume node
 const snare = new Tone.NoiseSynth().connect(snareGain);
+  snare.noise.type = "pink"
   // Snare envelope settings 
   snare.envelope.attack = 0.01;
-  snare.envelope.decay = 0.1;
+  snare.envelope.decay = 0.247;
   snare.envelope.sustain = 0;
   snare.envelope.release = 0;
 
@@ -201,7 +203,7 @@ snarePart.start();
 // PERC (channel 4)
 //////
 // Send is a gain node, controls level sent to reverb
-const percSend = new Tone.Gain(0).connect(verb)
+const percSend = new Tone.Gain(0.496).connect(verb)
 
 // Distortion connects to main output and reverb send
 const percDist = new Tone.Chebyshev(45).connect(compressor).connect(percSend);
@@ -240,7 +242,10 @@ percPart.start();
 // updateProb is called upon any pattern change
 // takes values from probArray, compares them to the threshold settings
 // and updates the target notes array with an
-let kickLength = hatsLength = snareLength = percLength = 16;
+let kickLength = 16;
+let hatsLength = 28;
+let snareLength = 24;
+let percLength = 32;
 
 function updateProb(index) {
   let track = probArray[index].slice(0, getLength(index))
