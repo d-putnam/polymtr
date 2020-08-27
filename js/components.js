@@ -28,6 +28,7 @@ let powerSwitch = new Nexus.Toggle('#power', {
 // start/stop the audio context
 powerSwitch.on('change', v => {
   if (v === true) {
+    Tone.start()
     if (Tone.context.state !== 'running') {
       Tone.context.resume();
     }
