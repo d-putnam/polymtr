@@ -781,7 +781,12 @@ hats_mult.colorize("fill","rgba(238,238,238,0.55)")
 // Hats pattern length
 let hats_len = document.querySelector('#hats-length')
 
-hats_len.onchange = (e) => {
+hats_len.oninput = () => {
+  if (hats_len.value < 3) {
+    hats_len.value = 3;
+  } else if (kick_len.value > 32) {
+    hats_len.value = 32;
+  }
   hatsLength = hats_len.value;
 
   hats_mult.destroy();
@@ -1012,7 +1017,12 @@ snare_mult.colorize("fill","rgba(238,238,238,0.55)")
 // snare pattern length
 let snare_len = document.querySelector('#snare-length')
 
-snare_len.onchange = () => {
+snare_len.oninput = () => {
+  if (snare_len.value < 3) {
+    snare_len.value = 3;
+  } else if (snare_len.value > 32) {
+    snare_len.value = 32;
+  }
   snareLength = snare_len.value;
 
   snare_mult.destroy();
@@ -1259,7 +1269,12 @@ perc_mult.colorize("fill","rgba(238,238,238,0.55)")
 // perc pattern length
 let perc_len = document.querySelector('#perc-length')
 
-perc_len.onchange = () => {
+perc_len.oninput = () => {
+  if (perc_len.value < 3) {
+    perc_len.value = 3;
+  } else if (perc_len.value > 32) {
+    perc_len.value = 32;
+  }
   percLength = perc_len.value;
 
   perc_mult.destroy();
