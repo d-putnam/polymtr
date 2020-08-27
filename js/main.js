@@ -60,7 +60,10 @@ const verbEQ = new Tone.EQ3().connect(compressor)
 const verb = new Tone.Reverb().connect(verbEQ);
 verb.decay = 4.5;
 verb.wet.value = 1;
-
+// Disable reverb for mobile devices
+if (screen.width < 415) {
+  verb.dispose();
+}
 
 
 //////

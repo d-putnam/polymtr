@@ -3,18 +3,20 @@
 /* // */
 
 
-// Oscilloscope
-let oscilloscope = new Nexus.Oscilloscope('#oscilloscope', {
-  'size': [window.innerWidth, window.innerHeight]
-})
-// connect it to our audio node
-oscilloscope.connect(compressor._compressor._nativeAudioNode);
-// set the colors
-oscilloscope.colorize("fill","rgb(40,40,40)");
-oscilloscope.colorize("accent","rgba(255, 255, 255, 0.2)");
-// watch for screen resize
-window.onresize = () => {
-  oscilloscope.resize(window.innerWidth, window.innerHeight);
+// Oscilloscope (disable on small screens)
+if (screen.width > 768) {
+  let oscilloscope = new Nexus.Oscilloscope('#oscilloscope', {
+    'size': [window.innerWidth, window.innerHeight]
+  })
+  // connect it to our audio node
+  oscilloscope.connect(compressor._compressor._nativeAudioNode);
+  // set the colors
+  oscilloscope.colorize("fill","rgb(40,40,40)");
+  oscilloscope.colorize("accent","rgba(255, 255, 255, 0.2)");
+  // watch for screen resize
+  window.onresize = () => {
+    oscilloscope.resize(window.innerWidth, window.innerHeight);
+  }
 }
 
 

@@ -2,6 +2,7 @@ body{
   margin:0;
   font-family: 'Russo One', sans-serif;
   color: rgb(190,190,190);
+  background-color: rgb(40,40,40);
 }
 
 #oscilloscope {
@@ -297,6 +298,7 @@ input {
   #reverb {
     max-width: 390px;
     min-width: 390px;
+    display:none;
   }
 
 }
