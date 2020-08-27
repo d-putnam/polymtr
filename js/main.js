@@ -37,18 +37,25 @@ let kickThresh1 = 64, kickThresh2 = 95,
 // Compression reduces volume, so connect it to a Gain node, then use compressor.reduction value
 // for makeup level. Sequence this param for smooth-ish auto-gain
 let compressorMakeup = new Tone.Gain(1).toDestination();
-let compressor = new Tone.Compressor(-40, 3).connect(compressorMakeup);
-// Give an arbitrary array to sequence
-let compArr = ["C4"];
-// update the makeup gain every 32nd note
-let compSeq = new Tone.Sequence(
-  (time, note) => {
-    if (compressor.reduction < -1) {
-      compressorMakeup.gain.rampTo(compressor.reduction / -2, 0.01);
-    }
-  }, compArr, "32n"
-);
-compSeq.start();
+let compressor;
+if (screen.width > 415) {
+  compressor = new Tone.Compressor(-40, 3).connect(compressorMakeup);
+  // Give an arbitrary array to sequence
+  let compArr = ["C4"];
+  // update the makeup gain every 32nd note
+  let compSeq = new Tone.Sequence(
+    (time, note) => {
+      if (compressor.reduction < -1) {
+        compressorMakeup.gain.rampTo(compressor.reduction / -2, 0.01);
+      }
+    }, compArr, "32n"
+  );
+  compSeq.start();
+} else {
+  compressor = new Tone.Gain(1).toDestination();
+}
+
+
 
 
 
@@ -60,10 +67,7 @@ const verbEQ = new Tone.EQ3().connect(compressor)
 const verb = new Tone.Reverb().connect(verbEQ);
 verb.decay = 4.5;
 verb.wet.value = 1;
-// Disable reverb for mobile devices
-if (screen.width < 415) {
-  verb.dispose();
-}
+
 
 
 //////
@@ -356,4 +360,9 @@ function getLength(index) {
   } else if (index === 3) {
     return percLength;
   }
+}
+
+// Disable reverb for mobile devices
+if (screen.width < 415) {
+  verb.dispose();
 }

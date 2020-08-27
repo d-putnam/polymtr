@@ -31,7 +31,7 @@ body{
 }
 .nav {
   position: absolute;
-  bottom: 10px;
+  top: 100px;
 }
 .nav-inactive {
   height:1.5rem;
@@ -189,13 +189,18 @@ body{
   margin-left: .5rem;
 }
 .left-label {
-  padding-left: .52rem;
+  padding-left: .40rem;
+}
+.left-arrow {
+  padding-top: 8px;
+  width:15px;
+  height:15px;
 }
 .right-label {
   text-align: right; 
   margin-top:0.3rem;
   margin-bottom:0.5rem;
-  padding-right:.52rem;
+  padding-right:.4rem;
 }
 
 

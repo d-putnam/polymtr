@@ -27,8 +27,8 @@ let powerSwitch = new Nexus.Toggle('#power', {
 })
 // start/stop the audio context
 powerSwitch.on('change', v => {
+  Tone.start()
   if (v === true) {
-    Tone.start()
     if (Tone.context.state !== 'running') {
       Tone.context.resume();
     }
@@ -82,205 +82,207 @@ globalRandom.colorize("mediumLight","rgb(150,150,150,0.9)")
 /* // */
 // Effects Rack
 /* // */
+if (screen.width > 415) {
+  // Compressor threshold (decibels)
+  let compThresh = new Nexus.Dial('#comp-thresh', {
+    'size': [60,60],
+    'interaction': 'radial', 
+    'mode': 'relative', 
+    'min': 0,
+    'max': 100,
+    'step': 0,
+    'value': 40
+  })
+  compThresh.on('change', v => {
+    compressor.threshold.value = v * -1;
+  })
 
 
-// Compressor threshold (decibels)
-let compThresh = new Nexus.Dial('#comp-thresh', {
-  'size': [60,60],
-  'interaction': 'radial', 
-  'mode': 'relative', 
-  'min': 0,
-  'max': 100,
-  'step': 0,
-  'value': 40
-})
-compThresh.on('change', v => {
-  compressor.threshold.value = v * -1;
-})
+  // Compressor ratio (positive)
+  let compRatio = new Nexus.Dial('#comp-ratio', {
+    'size': [60,60],
+    'interaction': 'radial',
+    'mode': 'relative', 
+    'min': 1,
+    'max': 20,
+    'step': 0,
+    'value': 3
+  })
+  compRatio.on('change', v => {
+    compressor.ratio.value = v;
+  })
 
 
-// Compressor ratio (positive)
-let compRatio = new Nexus.Dial('#comp-ratio', {
-  'size': [60,60],
-  'interaction': 'radial',
-  'mode': 'relative', 
-  'min': 1,
-  'max': 20,
-  'step': 0,
-  'value': 3
-})
-compRatio.on('change', v => {
-  compressor.ratio.value = v;
-})
+  // Compressor attack (time)
+  let compAttack = new Nexus.Dial('#comp-attack', {
+    'size': [40,40],
+    'interaction': 'radial', 
+    'mode': 'relative', 
+    'min': 0,
+    'max': 1,
+    'step': 0,
+    'value': 0.003
+  })
+  compAttack.on('change', v => {
+    compressor.attack.value = v;
+  })
 
 
-// Compressor attack (time)
-let compAttack = new Nexus.Dial('#comp-attack', {
-  'size': [40,40],
-  'interaction': 'radial', 
-  'mode': 'relative', 
-  'min': 0,
-  'max': 1,
-  'step': 0,
-  'value': 0.003
-})
-compAttack.on('change', v => {
-  compressor.attack.value = v;
-})
+  // Compressor release (time)
+  let compRelease = new Nexus.Dial('#comp-release', {
+    'size': [40,40],
+    'interaction': 'radial', 
+    'mode': 'relative',
+    'min': 0,
+    'max': 1,
+    'step': 0,
+    'value': 0.25
+  })
+  compRelease.on('change', v => {
+    compressor.release.value = v;
+  })
 
 
-// Compressor release (time)
-let compRelease = new Nexus.Dial('#comp-release', {
-  'size': [40,40],
-  'interaction': 'radial', 
-  'mode': 'relative',
-  'min': 0,
-  'max': 1,
-  'step': 0,
-  'value': 0.25
-})
-compRelease.on('change', v => {
-  compressor.release.value = v;
-})
+  // Compressor knee (decibels)
+  let compKnee = new Nexus.Dial('#comp-knee', {
+    'size': [40,40],
+    'interaction': 'radial', 
+    'mode': 'relative',
+    'min': 0,
+    'max': 40,
+    'step': 0,
+    'value': 30
+  })
+  compKnee.on('change', v => {
+    compressor.knee.value = v;
+  })
 
 
-// Compressor knee (decibels)
-let compKnee = new Nexus.Dial('#comp-knee', {
-  'size': [40,40],
-  'interaction': 'radial', 
-  'mode': 'relative',
-  'min': 0,
-  'max': 40,
-  'step': 0,
-  'value': 30
-})
-compKnee.on('change', v => {
-  compressor.knee.value = v;
-})
+  // Reverb Decay (time)
+  let roomSizeSlider = new Nexus.Dial('#roomSize', {
+    'size': [60,60],
+    'interaction': 'radial',
+    'mode': 'relative', 
+    'min': 0.1,
+    'max': 10,
+    'step': 0,
+    'value': 4.5
+  })
+  roomSizeSlider.on('change', v => {
+    verb.decay = v;
+  })
 
 
-// Reverb Decay (time)
-let roomSizeSlider = new Nexus.Dial('#roomSize', {
-  'size': [60,60],
-  'interaction': 'radial',
-  'mode': 'relative', 
-  'min': 0.1,
-  'max': 10,
-  'step': 0,
-  'value': 4.5
-})
-roomSizeSlider.on('change', v => {
-  verb.decay = v;
-})
+  // Reverb EQ Low (decibels)
+  let verb_low = new Nexus.Dial('#verb-low', {
+    'size': [40,40],
+    'interaction': 'radial', 
+    'mode': 'relative', 
+    'min': -10,
+    'max': 10,
+    'step': 0,
+    'value': 0
+  })
+  verb_low.on('change', v => {
+    verbEQ.low.value = v;
+  })
 
 
-// Reverb EQ Low (decibels)
-let verb_low = new Nexus.Dial('#verb-low', {
-  'size': [40,40],
-  'interaction': 'radial', 
-  'mode': 'relative', 
-  'min': -10,
-  'max': 10,
-  'step': 0,
-  'value': 0
-})
-verb_low.on('change', v => {
-  verbEQ.low.value = v;
-})
+  // Reverb EQ Mid (decibels)
+  let verb_mid = new Nexus.Dial('#verb-mid', {
+    'size': [40,40],
+    'interaction': 'radial', 
+    'mode': 'relative', 
+    'min': -10,
+    'max': 10,
+    'step': 0,
+    'value': 0
+  })
+  verb_mid.on('change', v => {
+    verbEQ.mid.value = v;
+  })    
 
 
-// Reverb EQ Mid (decibels)
-let verb_mid = new Nexus.Dial('#verb-mid', {
-  'size': [40,40],
-  'interaction': 'radial', 
-  'mode': 'relative', 
-  'min': -10,
-  'max': 10,
-  'step': 0,
-  'value': 0
-})
-verb_mid.on('change', v => {
-  verbEQ.mid.value = v;
-})    
+  // Reverb EQ High (decibels)
+  let verb_high = new Nexus.Dial('#verb-high', {
+    'size': [40,40],
+    'interaction': 'radial', 
+    'mode': 'relative', 
+    'min': -10,
+    'max': 10,
+    'step': 0,
+    'value': 0
+  })
+  verb_high.on('change', v => {
+    verbEQ.high.value = v;
+  })
 
 
-// Reverb EQ High (decibels)
-let verb_high = new Nexus.Dial('#verb-high', {
-  'size': [40,40],
-  'interaction': 'radial', 
-  'mode': 'relative', 
-  'min': -10,
-  'max': 10,
-  'step': 0,
-  'value': 0
-})
-verb_high.on('change', v => {
-  verbEQ.high.value = v;
-})
+  // Kick reverb send
+  let kick_send = new Nexus.Dial('#kick-send', {
+    'size': [30,30],
+    'interaction': 'radial',
+    'mode': 'relative',
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'value': 0
+  })
+  kick_send.on('change', v => {
+    let amp = v / 127;
+    kickSend.gain.rampTo(amp, 0.05);
+  })
 
 
-// Kick reverb send
-let kick_send = new Nexus.Dial('#kick-send', {
-  'size': [30,30],
-  'interaction': 'radial',
-  'mode': 'relative',
-  'min': 0,
-  'max': 127,
-  'step': 1,
-  'value': 0
-})
-kick_send.on('change', v => {
-  let amp = v / 127;
-  kickSend.gain.rampTo(amp, 0.05);
-})
+  // Hats reverb send
+  let hats_send = new Nexus.Dial('#hats-send', {
+    'size': [30,30],
+    'interaction': 'radial', // "radial", "vertical", or "horizontal"
+    'mode': 'relative', // "absolute" or "relative"
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'value': 0
+  })
+  hats_send.on('change', v => {
+    let amp = v / 127;
+    hatsSend.gain.rampTo(amp, 0.05);
+  })
 
 
-// Hats reverb send
-let hats_send = new Nexus.Dial('#hats-send', {
-  'size': [30,30],
-  'interaction': 'radial', // "radial", "vertical", or "horizontal"
-  'mode': 'relative', // "absolute" or "relative"
-  'min': 0,
-  'max': 127,
-  'step': 1,
-  'value': 0
-})
-hats_send.on('change', v => {
-  let amp = v / 127;
-  hatsSend.gain.rampTo(amp, 0.05);
-})
+  // Snare reverb send
+  let snare_send = new Nexus.Dial('#snare-send', {
+    'size': [30,30],
+    'interaction': 'radial', // "radial", "vertical", or "horizontal"
+    'mode': 'relative', // "absolute" or "relative"
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'value': 20
+  })
+  snare_send.on('change', v => {
+    let amp = v / 127;
+    snareSend.gain.rampTo(amp, 0.05);
+  })
 
 
-// Snare reverb send
-let snare_send = new Nexus.Dial('#snare-send', {
-  'size': [30,30],
-  'interaction': 'radial', // "radial", "vertical", or "horizontal"
-  'mode': 'relative', // "absolute" or "relative"
-  'min': 0,
-  'max': 127,
-  'step': 1,
-  'value': 20
-})
-snare_send.on('change', v => {
-  let amp = v / 127;
-  snareSend.gain.rampTo(amp, 0.05);
-})
+  // Perc reverb send
+  let perc_send = new Nexus.Dial('#perc-send', {
+    'size': [30,30],
+    'interaction': 'radial', 
+    'mode': 'relative', 
+    'min': 0,
+    'max': 127,
+    'step': 1,
+    'value': 63
+  })
+  perc_send.on('change', v => {
+    let amp = v / 127;
+    percSend.gain.rampTo(amp, 0.05);
+  })
+}
 
 
-// Perc reverb send
-let perc_send = new Nexus.Dial('#perc-send', {
-  'size': [30,30],
-  'interaction': 'radial', 
-  'mode': 'relative', 
-  'min': 0,
-  'max': 127,
-  'step': 1,
-  'value': 63
-})
-perc_send.on('change', v => {
-  let amp = v / 127;
-  percSend.gain.rampTo(amp, 0.05);
-})
 
 
 
