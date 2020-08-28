@@ -326,7 +326,8 @@ let kick_atk = new Nexus.Slider('#kick-attack', {
   'min': 0,
   'max': .25,
   'step': 0,
-  'value': .01
+  'value': .01,
+  'cc' : 0
 })
 kick_atk.on('change', v => {
   // Re-draw the envelope
@@ -612,7 +613,7 @@ let hr = 0.128;
 let hats_atk = new Nexus.Slider('#hats-attack', {
   'size': [20,75],
   'mode': 'absolute', 
-  'min': 0.,
+  'min': 0,
   'max': .25,
   'step': 0,
   'value': .01
