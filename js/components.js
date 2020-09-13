@@ -2,7 +2,7 @@
 // Global UI
 /* // */
 
-
+/*
 // Oscilloscope (disable on small screens)
 if (screen.width > 768) {
   let oscilloscope = new Nexus.Oscilloscope('#oscilloscope', {
@@ -18,7 +18,7 @@ if (screen.width > 768) {
     oscilloscope.resize(window.innerWidth, window.innerHeight);
   }
 }
-
+*/
 
 // Power switch
 let powerSwitch = new Nexus.Toggle('#power', {
