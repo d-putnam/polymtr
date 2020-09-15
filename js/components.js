@@ -3,7 +3,7 @@
 /* // */
 
 /*
-// Oscilloscope (disable on small screens)
+// Oscilloscope (disabled for better performance)
 if (screen.width > 768) {
   let oscilloscope = new Nexus.Oscilloscope('#oscilloscope', {
     'size': [window.innerWidth, window.innerHeight]
@@ -19,6 +19,21 @@ if (screen.width > 768) {
   }
 }
 */
+
+// Nav controls (small screens only)
+let buttons = document.querySelectorAll('.nav-button');
+buttons.forEach(button => {
+  button.onclick = () => {
+    buttons.forEach(box => {
+      box.classList.remove('nav-active')
+      box.classList.add('nav-inactive')
+      document.querySelector(box.dataset.target).classList.add('sm-hide')
+    })
+    button.classList.remove('nav-inactive')        
+    button.classList.add('nav-active')
+    document.querySelector(button.dataset.target).classList.remove('sm-hide')
+  }
+})
 
 // Power switch
 let powerSwitch = new Nexus.Toggle('#power', {
