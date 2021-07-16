@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/polymtr-react/static/css/main.b4b67e2d.chunk.css",
+    "main.js": "/polymtr-react/static/js/main.a5f32f89.chunk.js",
+    "main.js.map": "/polymtr-react/static/js/main.a5f32f89.chunk.js.map",
+    "runtime-main.js": "/polymtr-react/static/js/runtime-main.1918c6af.js",
+    "runtime-main.js.map": "/polymtr-react/static/js/runtime-main.1918c6af.js.map",
+    "static/js/2.8d3c547a.chunk.js": "/polymtr-react/static/js/2.8d3c547a.chunk.js",
+    "static/js/2.8d3c547a.chunk.js.map": "/polymtr-react/static/js/2.8d3c547a.chunk.js.map",
+    "index.html": "/polymtr-react/index.html",
+    "static/css/main.b4b67e2d.chunk.css.map": "/polymtr-react/static/css/main.b4b67e2d.chunk.css.map",
+    "static/js/2.8d3c547a.chunk.js.LICENSE.txt": "/polymtr-react/static/js/2.8d3c547a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1918c6af.js",
+    "static/js/2.8d3c547a.chunk.js",
+    "static/css/main.b4b67e2d.chunk.css",
+    "static/js/main.a5f32f89.chunk.js"
+  ]
+}
