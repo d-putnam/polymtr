@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+}
+
+.App {
+  font-family: 'Russo One', sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  color: rgb(190,190,190);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appWrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
+}
+
+.channelWrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
+  /*column-gap: 0.5rem;*/
+  padding: 1rem;
+  max-width: 50rem;
+}
+
+/*only for full size - add padding for FX chain*/
+@media only screen and (min-width: 415px) {
+  .channelWrap > :nth-child(1) {margin-right: 0.5rem;}
+  .channelWrap > :nth-child(2) {margin-right: 0.5rem;}
+  .channelWrap > :nth-child(3) {margin-right: 0.5rem;}
+}
+
+/*small desktop window - keep fx chain stacked evenly*/
+@media only screen and (max-width: 690px) and (min-width: 415px) {
+  .channelWrap > :nth-child(1) {flex-basis:30%;}
+  .channelWrap > :nth-child(2) {flex-basis:30%;}
+  .channelWrap > :nth-child(3) {flex-basis:40%;}
+  .channelWrap > :nth-child(4) {flex-basis:40%;}
+}
+
+/*mobile styles*/
+@media only screen and (max-width: 414px) {
+  .hideMobile {
+    display: none;
+  }
+
+  .channelWrap {
+    padding: 0rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}

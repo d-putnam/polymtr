@@ -1,0 +1,16 @@
+.Equalizer {
+  min-width: 128px;  
+}
+
+.Equalizer .eqControlWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  column-gap: 0.35rem
+}
+
+.Equalizer label {
+  font-size: small;
+}

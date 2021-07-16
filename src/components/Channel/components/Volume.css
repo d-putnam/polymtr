@@ -1,0 +1,38 @@
+.Volume {
+  display: flex;
+  flex-direction: row;
+  font-size: small
+}
+
+.Volume .sliderWrap {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  width: calc(100%-4px);
+}
+
+.Volume label {  
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  -webkit-text-orientation: upright;
+}
+
+.Volume .fxLabel {
+  font-size: smaller;
+}
+
+@media only screen and (max-width: 450px) {
+  .Volume .hideMobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 415px) {
+  .Volume label {
+    writing-mode: horizontal-tb;
+  }
+  .Volume .sliderWrap {
+    column-gap: 1rem;
+  }
+}
