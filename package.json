@@ -1,7 +1,7 @@
 {
   "name": "polymtr",
   "version": "0.1.0",
-  "homepage": "http://d-putnam.github.io/polymtr-react",
+  "homepage": "http://d-putnam.github.io/polymtr",
   "private": true,
   "dependencies": {
     "@react-midi/hooks": "^1.0.2",
